@@ -1,4 +1,5 @@
 import pandas as pd
+from math import isnan
 import os
 
 def get_resource_dir():
@@ -8,7 +9,21 @@ def read_excel_file(excel_file_path, sheet_name):
     return pd.read_excel (excel_file_path, sheet_name)
 
 def calculate_bonus(salary):
-    return '{:.2f}'.format(salary * 0.02 + 100).replace('.', ',')
+    return '{:.2f}'.format(convert_salary_to_number(salary) * 0.02 + 100).replace('.', ',')
+
+def convert_salary_to_number(salary):
+    if isnan(salary):
+        return 0
+
+    if not isinstance(salary, int) and not isinstance(salary, float):
+        try:
+            float(salary)
+        except ValueError:
+            return 0
+        except TypeError:
+            return 0
+    else:
+        return salary
 
 def print_result(df):
     for index, row in df.iterrows():
