@@ -24,8 +24,9 @@ def convert_salary_to_number(salary):
     return salary
 
 def print_result(df):
-    for index, row in df.iterrows():
-        print('Bonus für Mitarbeiter/in %s %s beträgt %s €' % (row.Vorname, row.Name, calculate_bonus(row['Monatsgehalt September'])))
+    if 'Monatsgehalt September'in df:
+        for index, row in df.iterrows():
+            print('Bonus für Mitarbeiter/in %s %s beträgt %s €' % (row.Vorname, row.Name, calculate_bonus(row['Monatsgehalt September'])))
 
 # ------------------------------------------------------------------------------------------------------------------------------------ #
 

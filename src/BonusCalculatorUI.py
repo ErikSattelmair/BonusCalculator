@@ -1,7 +1,8 @@
 import tkinter as tk
-from tkinter import filedialog
-import pandas as pd
 from math import isnan
+from tkinter import filedialog
+
+import pandas as pd
 
 work_sheet_name = "Tabelle1"
 
@@ -26,8 +27,9 @@ def convert_salary_to_number(salary):
 def get_result(df):
     result = []
 
-    for index, row in df.iterrows():
-        result.append('Bonus für Mitarbeiter/in %s %s beträgt %s €' % (row.Vorname, row.Name, calculate_bonus(row['Monatsgehalt September'])))
+    if 'Monatsgehalt September'in df:
+        for index, row in df.iterrows():
+            result.append('Bonus für Mitarbeiter/in %s %s beträgt %s €' % (row.Vorname, row.Name, calculate_bonus(row['Monatsgehalt September'])))
 
     return result
 
@@ -67,4 +69,5 @@ def create_main_window():
 # ---------------------------------------------------- Main part ------------------------------------------------------------------------------- #
 
 root = tk.Tk()
+root.title('Bonus Calculator')
 create_main_window()
